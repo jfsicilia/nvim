@@ -15,23 +15,23 @@ end
 local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
 
--- Configure lazy.nvim.
+-- Load plugins.
 require('lazy').setup {
-  require 'plugins.fileexplorer', -- Neotree file manager plugin.
-  require 'plugins.theme', -- Catppuccin colorscheme plugin.
+  require 'plugins.fileexplorer', -- File manager plugin.
+  require 'plugins.theme', -- Colorscheme plugin.
   require 'plugins.tabs', -- Buffer/tabs line plugin.
-  require 'plugins.infoline', -- Current buffer line information.
-  require 'plugins.parser', -- Parses language to tree for better code comprehension.
-  require 'plugins.fuzzyfind', -- Fuzzy find in neovim.
-  require 'plugins.gitsigns', -- Git signs on the editor gutter.
-  require 'plugins.welcome', -- Displays recent files on welcome screen.
-  require 'plugins.indentlines', -- Displays vertical lines for different idents.
-  require 'plugins.misc', -- Misc plugins
-  require 'plugins.bufferfileexplorer', -- Use buffer as file explorer.
-  require 'plugins.lazygit', -- Use lazy git in vim.
-  require 'plugins.outline', -- Get an outline window.
-  require 'plugins.lsp', -- Language Server Providers.
-  require 'plugins.autocompletion', -- Autocompletion.
-  require 'plugins.autoformatting', -- Autoformatting.
-  require 'plugins.fastjump', -- Autoformatting.
+  require 'plugins.infoline', -- Buffer line information plugin
+  require 'plugins.parser', -- Language parser plugin.
+  require 'plugins.fuzzyfind', -- Fuzzy find plugin.
+  require 'plugins.gitsigns', -- Git signs on the editor gutter plugin.
+  require 'plugins.welcome', -- Displays recent files on welcome screen plugin.
+  require 'plugins.indentlines', -- Displays vertical lines for indents plugin.
+  require 'plugins.misc', -- Small misc plugins.
+  require 'plugins.bufferfileexplorer', -- Use buffer as file explorer plugin.
+  require 'plugins.lazygit', -- Lazy git plugin.
+  require 'plugins.outline', -- Outline window plugin.
+  require 'plugins.lsp', -- Language Server Providers plugin.
+  require 'plugins.autocompletion', -- Autocompletion plugin.
+  require 'plugins.autoformatting', -- Autoformatting plugin.
+  require 'plugins.fastjump', -- Fast jump with labels plugin.
 }
