@@ -1,21 +1,24 @@
 return {
   'folke/flash.nvim',
   event = 'VeryLazy',
-  ---@type Flash.Config
   opts = {
     label = {
+      -- Don't user uppercase letters in labels.
       uppercase = false,
+      -- Use colors in labels.
       rainbow = {
         enabled = true,
         shades = 9,
       },
     },
     modes = {
+      -- Enable fast jump in searches.
       search = {
         enabled = true,
       },
+      -- Enable labels in f, F, t, T
       char = {
-        jump_labels = false,
+        jump_labels = true,
       },
     },
   },
@@ -29,36 +32,36 @@ return {
       desc = 'Flash',
     },
     {
-      'S',
+      '<S-space>',
       mode = { 'n', 'x', 'o' },
       function()
         require('flash').treesitter()
       end,
       desc = 'Flash Treesitter',
     },
-    {
-      'r',
-      mode = 'o',
-      function()
-        require('flash').remote()
-      end,
-      desc = 'Remote Flash',
-    },
-    {
-      'R',
-      mode = { 'o', 'x' },
-      function()
-        require('flash').treesitter_search()
-      end,
-      desc = 'Treesitter Search',
-    },
-    {
-      '<c-s>',
-      mode = { 'c' },
-      function()
-        require('flash').toggle()
-      end,
-      desc = 'Toggle Flash Search',
-    },
+    -- {
+    --   'r',
+    --   mode = 'o',
+    --   function()
+    --     require('flash').remote()
+    --   end,
+    --   desc = 'Remote Flash',
+    -- },
+    -- {
+    --   'R',
+    --   mode = { 'o', 'x' },
+    --   function()
+    --     require('flash').treesitter_search()
+    --   end,
+    --   desc = 'Treesitter Search',
+    -- },
+    -- {
+    --   '<c-s>',
+    --   mode = { 'c' },
+    --   function()
+    --     require('flash').toggle()
+    --   end,
+    --   desc = 'Toggle Flash Search',
+    -- },
   },
 }

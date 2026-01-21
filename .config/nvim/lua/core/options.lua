@@ -4,7 +4,7 @@ vim.o.mouse = 'a' -- Enable mouse mode
 vim.o.clipboard = 'unnamedplus' -- Sync clipboard between OS and Neovim.
 vim.o.breakindent = true -- Enable break indent
 vim.o.undofile = true -- Save undo history
-vim.opt.colorcolumn = "79" -- Show vertical column mark.
+vim.opt.colorcolumn = '79' -- Show vertical column mark.
 vim.o.ignorecase = true -- Case-insensitive searching UNLESS \C or capital in search
 vim.o.smartcase = true -- smart case
 vim.wo.signcolumn = 'yes' -- Keep signcolumn on by default
@@ -19,10 +19,10 @@ vim.o.whichwrap = 'bs<>[]hl' -- which "horizontal" keys are allowed to travel to
 vim.o.wrap = true -- display lines as one long line
 vim.o.linebreak = true -- companion to wrap don't split words
 vim.opt.listchars = { -- especial characters.
-  tab = "▸ ",
-  eol = "¬",
+  tab = '▸ ',
+  eol = '¬',
 }
-vim.opt.showbreak = "↪"
+vim.opt.showbreak = '↪'
 vim.o.scrolloff = 4 -- minimal number of screen lines to keep above and below the cursor
 vim.o.sidescrolloff = 8 -- minimal number of screen columns either side of cursor if wrap is `false`
 vim.o.relativenumber = true -- set relative numbered lines
@@ -52,3 +52,10 @@ vim.opt.runtimepath:remove '/usr/share/vim/vimfiles' -- separate vim plugins fro
 vim.opt.foldenable = true -- Allow folding.
 vim.opt.foldlevel = 99 -- Max fold depth shown.
 vim.opt.foldlevelstart = 99 -- Fold level applied when opening a file.
+
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  pattern = '*.kbd',
+  callback = function()
+    vim.bo.filetype = 'commonlisp'
+  end,
+})

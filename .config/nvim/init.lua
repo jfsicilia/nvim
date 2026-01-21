@@ -3,6 +3,7 @@ require 'core.keymaps'
 
 -- Load lazy.nvim plugin manager.
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+---@diagnostic disable-next-line: undefined-field
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
   local out = vim.fn.system { 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath }
@@ -34,10 +35,3 @@ require('lazy').setup {
   require 'plugins.autoformatting', -- Autoformatting.
   require 'plugins.fastjump', -- Autoformatting.
 }
-
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-  pattern = '*.kbd',
-  callback = function()
-    vim.bo.filetype = 'commonlisp'
-  end,
-})
