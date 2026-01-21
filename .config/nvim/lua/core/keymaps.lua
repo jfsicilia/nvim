@@ -119,7 +119,7 @@ vim.keymap.set('v', '<A-k>', ':m .-2<CR>==', opts)
 vim.keymap.set('v', 'p', '"_dP', opts)
 
 -- Replace word under cursor
-vim.keymap.set('n', '<leader>j', '*``cgn', opts)
+-- vim.keymap.set('n', '<leader>j', '*``cgn', opts)
 
 -- Explicitly yank to system clipboard (highlighted and entire row)
 vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]])

@@ -16,7 +16,7 @@ rtp:prepend(lazypath)
 
 -- Configure lazy.nvim.
 require('lazy').setup {
-  require 'plugins.filexplorer', -- Neotree file manager plugin.
+  require 'plugins.fileexplorer', -- Neotree file manager plugin.
   require 'plugins.theme', -- Catppuccin colorscheme plugin.
   require 'plugins.tabs', -- Buffer/tabs line plugin.
   require 'plugins.infoline', -- Current buffer line information.
@@ -32,6 +32,7 @@ require('lazy').setup {
   require 'plugins.lsp', -- Language Server Providers.
   require 'plugins.autocompletion', -- Autocompletion.
   require 'plugins.autoformatting', -- Autoformatting.
+  require 'plugins.fastjump', -- Autoformatting.
 }
 
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
