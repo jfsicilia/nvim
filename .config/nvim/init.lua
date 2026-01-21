@@ -16,19 +16,19 @@ rtp:prepend(lazypath)
 
 -- Configure lazy.nvim.
 require('lazy').setup {
-  require 'plugins.neotree', -- Neotree file manager plugin.
-  require 'plugins.catppuccin', -- Catppuccin colorscheme plugin.
-  require 'plugins.bufferline', -- Buffer/tabs line plugin.
-  require 'plugins.lualine', -- Current buffer line information.
-  require 'plugins.treesitter', -- Parses language to tree for better code comprehension.
-  require 'plugins.telescope', -- Fuzzy find in neovim.
+  require 'plugins.filexplorer', -- Neotree file manager plugin.
+  require 'plugins.theme', -- Catppuccin colorscheme plugin.
+  require 'plugins.tabs', -- Buffer/tabs line plugin.
+  require 'plugins.infoline', -- Current buffer line information.
+  require 'plugins.parser', -- Parses language to tree for better code comprehension.
+  require 'plugins.fuzzyfind', -- Fuzzy find in neovim.
   require 'plugins.gitsigns', -- Git signs on the editor gutter.
-  require 'plugins.alpha', -- Displays recent files on welcome screen.
-  require 'plugins.indent-blankline', -- Displays vertical lines for different idents.
+  require 'plugins.welcome', -- Displays recent files on welcome screen.
+  require 'plugins.indentlines', -- Displays vertical lines for different idents.
   require 'plugins.misc', -- Misc plugins
-  require 'plugins.oil', -- Use buffer as file explorer.
+  require 'plugins.bufferfileexplorer', -- Use buffer as file explorer.
   require 'plugins.lazygit', -- Use lazy git in vim.
-  require 'plugins.aerial', -- Get an outline window.
+  require 'plugins.outline', -- Get an outline window.
   require 'plugins.lsp', -- Language Server Providers.
   require 'plugins.autocompletion', -- Autocompletion.
   require 'plugins.autoformatting', -- Autoformatting.
