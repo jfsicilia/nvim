@@ -18,7 +18,7 @@ return {
       },
       -- Enable labels in f, F, t, T
       char = {
-        jump_labels = true,
+        jump_labels = false,
       },
     },
   },
