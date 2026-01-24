@@ -1,11 +1,11 @@
-vim.o.title = true
+vim.o.title = true -- Show nvim title in the terminal window.
 vim.o.hlsearch = true -- Set highlight on search
 vim.wo.number = true -- Make line numbers default
 vim.o.mouse = 'a' -- Enable mouse mode
 vim.o.clipboard = 'unnamedplus' -- Sync clipboard between OS and Neovim.
 vim.o.breakindent = true -- Enable break indent
 vim.o.undofile = true -- Save undo history
-vim.opt.colorcolumn = '79' -- Show vertical column mark.
+vim.o.colorcolumn = '79' -- Show vertical column mark.
 vim.o.ignorecase = true -- Case-insensitive searching UNLESS \C or capital in search
 vim.o.smartcase = true -- smart case
 vim.wo.signcolumn = 'yes' -- Keep signcolumn on by default
