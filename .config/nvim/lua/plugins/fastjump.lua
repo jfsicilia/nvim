@@ -29,7 +29,7 @@ return {
       function()
         require('flash').jump()
       end,
-      desc = 'Flash',
+      desc = 'FAST: Flash',
     },
     {
       '<S-space>',
@@ -37,7 +37,7 @@ return {
       function()
         require('flash').treesitter()
       end,
-      desc = 'Flash Treesitter',
+      desc = 'FAST: Flash Treesitter',
     },
     -- {
     --   'r',

@@ -20,7 +20,7 @@ return {
       },
     }
     -- You probably also want to set a keymap to toggle aerial
-    vim.keymap.set('n', '<leader>o', '<cmd>AerialToggle!<CR>')
-    vim.keymap.set('n', '<leader>on', '<cmd>AerialNavToggle<CR>')
+    vim.keymap.set('n', '<leader>to', '<cmd>AerialToggle!<CR>', { desc = 'AER: Toggle outline' })
+    vim.keymap.set('n', '<leader>ton', '<cmd>AerialNavToggle<CR>', { desc = 'AER: Toggle navigation outline' })
   end,
 }

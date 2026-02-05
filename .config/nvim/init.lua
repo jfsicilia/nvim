@@ -34,4 +34,5 @@ require('lazy').setup {
   require 'plugins.autocompletion', -- Autocompletion plugin.
   require 'plugins.autoformatting', -- Autoformatting plugin.
   require 'plugins.fastjump', -- Fast jump with labels plugin.
+  require 'plugins.help', -- Help plugin.
 }

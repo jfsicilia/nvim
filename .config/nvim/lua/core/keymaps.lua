@@ -4,8 +4,20 @@
 vim.g.mapleader = ','
 vim.g.maplocalleader = ','
 
--- For conciseness
+-- Help variables and functions
 local opts = { noremap = true, silent = true }
+
+local function nmap(lhs, rhs, desc)
+  vim.keymap.set('n', lhs, rhs, vim.tbl_extend('force', opts, { desc = 'JFS: ' .. desc }))
+end
+
+local function vmap(lhs, rhs, desc)
+  vim.keymap.set('v', lhs, rhs, vim.tbl_extend('force', opts, { desc = 'JFS: ' .. desc }))
+end
+
+local function imap(lhs, rhs, desc)
+  vim.keymap.set('i', lhs, rhs, vim.tbl_extend('force', opts, { desc = 'JFS: ' .. desc }))
+end
 
 -- Disable the leader key's default behavior in Normal and Visual modes
 vim.keymap.set({ 'n', 'v' }, ',', '<Nop>', { silent = true })
@@ -15,120 +27,107 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Clear highlights
-vim.keymap.set('n', '<Esc>', ':noh<CR>', opts)
+nmap('<Esc>', ':noh<CR>', 'Clear highlights')
 
 -- Save file
-vim.keymap.set('n', '<C-s>', '<cmd>w<CR>', opts)
-vim.keymap.set('i', '<C-s>', '<C-o>:w<CR>', opts)
+nmap('<C-s>', '<cmd>w<CR>', 'Save file')
+imap('<C-s>', '<C-o>:w<CR>i', 'Save file')
+
 -- Save file without auto-formatting
-vim.keymap.set('n', '<leader>sn', '<cmd>noautocmd w <CR>', opts)
+nmap('<leader>wn', '<cmd>noautocmd w <CR>', 'Save file without formatting')
 
 -- Quit file
-vim.keymap.set('n', '<C-q>', '<cmd> q <CR>', opts)
+nmap('<C-q>', '<cmd> q <CR>', 'Quit file')
 
--- c or x does not copy. Use yank to copy.
--- vim.keymap.set('n', 'd', '"_d', opts)
-vim.keymap.set('n', 'c', '"_c', opts)
-vim.keymap.set('n', 'x', '"_x', opts)
+-- Acoid c or x copying to clipboard. Use y (yank) or d (delete) when
+-- copy to clipboard is needed.
+nmap('c', '"_c', 'Change without clipboard')
+nmap('x', '"_x', 'Delete char without clipboard')
+nmap('C', '"_C', 'Change til end without clipboard')
+nmap('X', 'v$h"_x', 'Deletes til end without clipboard') -- Deletes from cursor to end.
 
 -- Arrow like movement in insert and normal mode.
-vim.keymap.set({ 'n', 'i' }, '<C-h>', '<Left>', opts)
-vim.keymap.set({ 'n', 'i' }, '<C-l>', '<Right>', opts)
-vim.keymap.set({ 'n', 'i' }, '<C-j>', '<Down>', opts)
-vim.keymap.set({ 'n', 'i' }, '<C-k>', '<Up>', opts)
+nmap('<C-h>', '<Left>', 'Move left')
+nmap('<C-l>', '<Right>', 'Move right')
+nmap('<C-j>', '<Down>', 'Move down')
+nmap('<C-k>', '<Up>', 'Move up')
+imap('<C-h>', '<Left>', 'Move left')
+imap('<C-l>', '<Right>', 'Move right')
+imap('<C-j>', '<Down>', 'Move down')
+imap('<C-k>', '<Up>', 'Move up')
 
 -- Select all
-vim.keymap.set('n', '<leader>a', 'ggVG', opts)
+nmap('<leader>a', 'ggVG', 'Select all')
 
 -- Move lines
-vim.keymap.set('n', '-', ':m .+1<CR>', opts) -- move line upwards(n)
-vim.keymap.set('n', '_', ':m .-2<CR>', opts) -- move line downwards(n)
-vim.keymap.set('v', '-', ":m '>+1<CR>gv=gv") -- move line upwards(v)
-vim.keymap.set('v', '_', ":m '<-2<CR>gv=gv") -- move line downwards(v)
+nmap('-', ':m .+1<CR>', 'Move line upwards')
+nmap('_', ':m .-2<CR>', 'Move line downwards')
+vmap('-', ":m '>+1<CR>gv=gv'", 'Move line upwards')
+vmap('_', ":m '<-2<CR>gv=gv'", 'Move line downwards')
 
 -- Vertical scroll and center
-vim.keymap.set('n', '<C-d>', '<C-d>zz', opts)
-vim.keymap.set('n', '<C-u>', '<C-u>zz', opts)
+nmap('<C-d>', '<C-d>', 'Half page down and center')
+nmap('<C-u>', '<C-u>', 'Half page up and center')
 
 -- Find and center
-vim.keymap.set('n', 'n', 'nzzzv')
-vim.keymap.set('n', 'N', 'Nzzzv')
+nmap('n', 'nzzzv', 'Find and center')
+nmap('N', 'Nzzzv', 'Find and center')
 
 -- Resize with arrows
-vim.keymap.set('n', '<Up>', ':resize -2<CR>', opts)
-vim.keymap.set('n', '<Down>', ':resize +2<CR>', opts)
-vim.keymap.set('n', '<Left>', ':vertical resize -2<CR>', opts)
-vim.keymap.set('n', '<Right>', ':vertical resize +2<CR>', opts)
+-- nmap('<Up>', ':resize -2<CR>', 'Resize window up')
+-- nmap('<Down>', ':resize +2<CR>', 'Resize window down')
+-- nmap('<Left>', ':vertical resize -2<CR>', 'Resize window left')
+-- nmap('<Right>', ':vertical resize +2<CR>', 'Resize window right')
 
 -- Buffers
-vim.keymap.set('n', '<Tab>', ':bnext<CR>', opts)
-vim.keymap.set('n', '<leader>.', ':bnext<CR>', opts)
-vim.keymap.set('n', '<S-Tab>', ':bprevious<CR>', opts)
-vim.keymap.set('n', '<leader>m', ':bprevious<CR>', opts)
-vim.keymap.set('n', '<leader><leader>', ':b#<CR>', opts)
-vim.keymap.set('n', '<C-i>', '<C-i>', opts) -- to restore jump forward
-vim.keymap.set('n', '<leader>x', ':Bdelete!<CR>', opts) -- close buffer
-vim.keymap.set('n', '<leader>b', '<cmd> enew <CR>', opts) -- new buffer
-
--- Increment/decrement numbers
-vim.keymap.set('n', '<leader>+', '<C-a>', opts) -- increment
-vim.keymap.set('n', '<leader>-', '<C-x>', opts) -- decrement
+-- nmap('<Tab>', ':bnext<CR>', 'Next buffer')
+nmap('<leader>.', ':bnext<CR>', 'Next buffer')
+-- nmap('<S-Tab>', ':bprevious<CR>', 'Previous buffer')
+nmap('<leader>m', ':bprevious<CR>', 'Previous buffer')
+nmap('<leader><leader>', ':b#<CR>', 'Toggle recent buffer')
+--nmap('<C-i>', '<C-i>', 'Jump forward')
+nmap('<leader>x', ':Bdelete!<CR>', 'Close buffer') -- close buffer
+nmap('<leader>nb', '<cmd> enew <CR>', 'New buffer') -- new buffer
 
 -- Window management
--- vim.keymap.set('n', '<leader>v', '<C-w>v', opts) -- split window vertically
--- vim.keymap.set('n', '<leader>h', '<C-w>s', opts) -- split window horizontally
-vim.keymap.set('n', '<leader>se', '<C-w>=', opts) -- make split windows equal width & height
-vim.keymap.set('n', '<leader>xs', ':close<CR>', opts) -- close current split window
+nmap('<leader>\\', '<C-w>v', 'Split window vertically')
+nmap('<leader>-', '<C-w>s', 'Split window horizonatally')
 
 -- Navigate between splits
-vim.keymap.set('n', '<leader>k', ':wincmd k<CR>', opts)
-vim.keymap.set('n', '<leader>j', ':wincmd j<CR>', opts)
-vim.keymap.set('n', '<leader>h', ':wincmd h<CR>', opts)
-vim.keymap.set('n', '<leader>l', ':wincmd l<CR>', opts)
+nmap('<leader>k', ':wincmd k<CR>', 'Focus above pane')
+nmap('<leader>j', ':wincmd j<CR>', 'Focus below pane')
+nmap('<leader>h', ':wincmd h<CR>', 'Focus left pane')
+nmap('<leader>l', ':wincmd l<CR>', 'Focus right pane')
 
 -- Blank lines
-vim.keymap.set('n', '<leader>-', ":<C-u>call append(line('.'), repeat([''], v:count1))<CR>", opts)
-vim.keymap.set('n', '<leader>_', ":<C-u>call append(line('.')-1, repeat([''], v:count1))<CR>", opts)
+nmap('<leader>nl', ":<C-u>call append(line('.'), repeat([''], v:count1))<CR>", 'New line below (remain normal mode)')
+nmap('<leader>nL', ":<C-u>call append(line('.')-1, repeat([''], v:count1))<CR>", 'New line above (remain normal mode)')
 
 -- Fast line begin/end
-vim.keymap.set('n', 'H', '^', opts)
-vim.keymap.set('n', 'L', '$', opts)
+nmap('H', '^', 'Begin of line')
+nmap('L', '$', 'End of line')
 
--- Tabs
-vim.keymap.set('n', '<leader>to', ':tabnew<CR>', opts) -- open new tab
-vim.keymap.set('n', '<leader>tx', ':tabclose<CR>', opts) -- close current tab
-vim.keymap.set('n', '<leader>tn', ':tabn<CR>', opts) --  go to next tab
-vim.keymap.set('n', '<leader>tp', ':tabp<CR>', opts) --  go to previous tab
+-- Toggles
+nmap('<leader>tw', '<cmd>set wrap!<CR>', 'Toggle wrapping')
 
--- Toggle line wrapping
---vim.keymap.set('n', '<leader>lw', '<cmd>set wrap!<CR>', opts)
-
--- Press jk fast to exit insert mode
---vim.keymap.set('i', 'jk', '<ESC>', opts)
---vim.keymap.set('i', 'kj', '<ESC>', opts)
-
--- Stay in indent mode
-vim.keymap.set('v', '<', '<gv', opts)
-vim.keymap.set('v', '>', '>gv', opts)
-
--- Move text up and down
-vim.keymap.set('v', '<A-j>', ':m .+1<CR>==', opts)
-vim.keymap.set('v', '<A-k>', ':m .-2<CR>==', opts)
+-- Indent
+vmap('<', '<gv', 'Indent left') -- Remains selection.
+vmap('>', '>gv', 'Indent right') -- Remains selection.
 
 -- Keep last yanked when pasting
-vim.keymap.set('v', 'p', '"_dP', opts)
+vmap('p', '"_dP', 'Paste visual')
 
--- Replace word under cursor
--- vim.keymap.set('n', '<leader>j', '*``cgn', opts)
+-- Which-Key
+nmap('<leader>?', function()
+  require('which-key').show { global = true }
+end, 'JFS: Show which-key')
 
--- Explicitly yank to system clipboard (highlighted and entire row)
-vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]])
-vim.keymap.set('n', '<leader>Y', [["+Y]])
+-- LazyGit
+nmap('<leader>gl', '<cmd>LazyGit<CR>', 'LazyGit')
 
--- Toggle diagnostics
+-- Diagnostics
 local diagnostics_active = true
-
-vim.keymap.set('n', '<leader>do', function()
+nmap('<leader>td', function()
   diagnostics_active = not diagnostics_active
 
   if diagnostics_active then
@@ -136,20 +135,44 @@ vim.keymap.set('n', '<leader>do', function()
   else
     vim.diagnostic.enable(false)
   end
-end)
+end, 'JFS: Toggle diagnostics')
 
--- Diagnostic keymaps
 vim.keymap.set('n', '[d', function()
   vim.diagnostic.jump { count = -1, float = true }
-end, { desc = 'Go to previous diagnostic message' })
+end, { desc = 'JFS: Go to previous diagnostic message' })
 
 vim.keymap.set('n', ']d', function()
   vim.diagnostic.jump { count = 1, float = true }
-end, { desc = 'Go to next diagnostic message' })
+end, { desc = 'JFS: Go to next diagnostic message' })
 
-vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'JFS: Open floating diagnostic message' })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'JFS: Open diagnostics list' })
 
 -- Save and load session
-vim.keymap.set('n', '<leader>ss', ':mksession! .session.vim<CR>', { noremap = true, silent = false })
-vim.keymap.set('n', '<leader>sl', ':source .session.vim<CR>', { noremap = true, silent = false })
+vim.keymap.set('n', '<leader>ss', ':mksession! .session.vim<CR>', { desc = 'JFS: Save session', noremap = true, silent = false })
+vim.keymap.set('n', '<leader>sl', ':source .session.vim<CR>', { desc = 'JFS: Load session', noremap = true, silent = false })
+
+vim.keymap.set('n', 'j', function()
+  if vim.v.count > 1 then
+    return "m'" .. vim.v.count .. 'j'
+  end
+  return 'j'
+end, { expr = true, noremap = true, silent = true })
+
+vim.keymap.set('n', 'k', function()
+  if vim.v.count > 1 then
+    return "m'" .. vim.v.count .. 'k'
+  end
+  return 'k'
+end, { expr = true, noremap = true, silent = true })
+-- Explicitly yank to system clipboard (highlighted and entire row)
+-- vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]])
+-- vim.keymap.set('n', '<leader>Y', [["+Y]])
+--nmap('<leader>se', '<C-w>=', 'Make split window equal width & height')
+--nmap('<leader>xs', ':close<CR>', 'Close current split')
+--
+--
+--
+-- TODO
+-- hacer que C-] y C-[ sean atras y adelante. Quizás entonces hacer C-i
+-- jump to tag. y C-o jump back from tag.sl
