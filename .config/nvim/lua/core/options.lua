@@ -1,4 +1,5 @@
 vim.o.title = true -- Show nvim title in the terminal window.
+vim.opt.nrformats:append 'alpha' -- Lets increment/decrement letters with ctrl+a/x.
 vim.o.hlsearch = true -- Set highlight on search
 vim.wo.number = true -- Make line numbers default
 vim.o.mouse = 'a' -- Enable mouse mode
@@ -54,9 +55,18 @@ vim.opt.foldenable = true -- Allow folding.
 vim.opt.foldlevel = 99 -- Max fold depth shown.
 vim.opt.foldlevelstart = 99 -- Fold level applied when opening a file.
 
+-- Activates commonlisp language syntax when opening .kbd files.
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   pattern = '*.kbd',
   callback = function()
     vim.bo.filetype = 'commonlisp'
+  end,
+})
+
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when copying (yank)',
+  group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
   end,
 })
