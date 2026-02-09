@@ -75,7 +75,8 @@ return { -- Autocompletion
       mapping = cmp.mapping.preset.insert {
         ['<C-j>'] = cmp.mapping.select_next_item(), -- Select the [n]ext item
         ['<C-k>'] = cmp.mapping.select_prev_item(), -- Select the [p]revious item
-        ['<Tab>'] = cmp.mapping.confirm { select = true }, -- Accept the completion with Tab.
+        -- ['<Tab>'] = cmp.mapping.confirm { select = true }, -- Accept the completion with Tab.
+        ['<CR>'] = cmp.mapping.confirm { select = true }, -- Accept the completion with Enter.
         ['<C-space>'] = cmp.mapping.complete {}, -- Manually trigger a completion from nvim-cmp.
 
         -- Think of <c-l> as moving to the right of your snippet expansion.
