@@ -17,22 +17,22 @@ rtp:prepend(lazypath)
 
 -- Load plugins.
 require('lazy').setup {
-  require 'plugins.fileexplorer', -- File manager plugin.
-  require 'plugins.theme', -- Colorscheme plugin.
-  require 'plugins.tabs', -- Buffer/tabs line plugin.
-  require 'plugins.infoline', -- Buffer line information plugin
-  require 'plugins.parser', -- Language parser plugin.
-  require 'plugins.fuzzyfind', -- Fuzzy find plugin.
+  require 'plugins.fileexplorer', -- File manager plugin (neotree).
+  require 'plugins.theme', -- Colorscheme plugin (catppuccin).
+  require 'plugins.tabs', -- Buffer/tabs line plugin (bufferline).
+  require 'plugins.infoline', -- Buffer line information plugin (lualine).
+  require 'plugins.parser', -- Language parser plugin (treesitter).
+  require 'plugins.fuzzyfind', -- Fuzzy find plugin (telescope).
   require 'plugins.gitsigns', -- Git signs on the editor gutter plugin.
-  require 'plugins.welcome', -- Displays recent files on welcome screen plugin.
-  require 'plugins.indentlines', -- Displays vertical lines for indents plugin.
+  require 'plugins.welcome', -- Displays recent files on welcome screen plugin (alpha).
+  require 'plugins.indentlines', -- Displays vertical lines for indents plugin (indent-blankline).
   require 'plugins.misc', -- Small misc plugins.
-  require 'plugins.bufferfileexplorer', -- Use buffer as file explorer plugin.
+  require 'plugins.bufferfileexplorer', -- Use buffer as file explorer plugin (oil).
   require 'plugins.lazygit', -- Lazy git plugin.
-  require 'plugins.outline', -- Outline window plugin.
-  require 'plugins.lsp', -- Language Server Providers plugin.
-  require 'plugins.autocompletion', -- Autocompletion plugin.
-  require 'plugins.autoformatting', -- Autoformatting plugin.
-  require 'plugins.fastjump', -- Fast jump with labels plugin.
-  require 'plugins.help', -- Help plugin.
+  require 'plugins.outline', -- Outline window plugin (aerial) .
+  require 'plugins.lsp', -- Language Server Providers plugin (nvim-lspconfig + mason).
+  require 'plugins.autocompletion', -- Autocompletion plugin (nvim-cmp)
+  require 'plugins.autoformatting', -- Autoformatting plugin (none-ls).
+  require 'plugins.fastjump', -- Fast jump with labels plugin (flash).
+  require 'plugins.help', -- Help plugin (which-key).
 }
