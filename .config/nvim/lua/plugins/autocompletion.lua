@@ -21,6 +21,7 @@ return { -- Autocompletion
     --  nvim-cmp does not ship with all sources by default. They are split
     --  into multiple repos for maintenance purposes.
     'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
 
@@ -68,13 +69,23 @@ return { -- Autocompletion
         end,
       },
       completion = { completeopt = 'menu,menuone,noinsert' },
-      -- window = {
-      --     completion = cmp.config.window.bordered(),
-      --     documentation = cmp.config.window.bordered(),
-      -- },
+      window = {
+        -- Main documentation window.
+        completion = cmp.config.window.bordered {
+          border = 'rounded',
+          winhighlight = 'Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None',
+        },
+        -- Sidebar documentation window.
+        documentation = cmp.config.window.bordered {
+          border = 'rounded',
+          winhighlight = 'Normal:CmpDoc,FloatBorder:CmpDocBorder,Search:None',
+        },
+      },
       mapping = cmp.mapping.preset.insert {
         ['<C-j>'] = cmp.mapping.select_next_item(), -- Select the [n]ext item
+        ['<Tab>'] = cmp.mapping.select_next_item(), -- Select the [n]ext item
         ['<C-k>'] = cmp.mapping.select_prev_item(), -- Select the [p]revious item
+        ['<S-Tab>'] = cmp.mapping.select_prev_item(), -- Select the [p]revious item
         -- ['<Tab>'] = cmp.mapping.confirm { select = true }, -- Accept the completion with Tab.
         ['<CR>'] = cmp.mapping.confirm { select = true }, -- Accept the completion with Enter.
         ['<C-space>'] = cmp.mapping.complete {}, -- Manually trigger a completion from nvim-cmp.
@@ -120,6 +131,7 @@ return { -- Autocompletion
       },
       sources = {
         { name = 'nvim_lsp' },
+        { name = 'nvim_lsp_signature_help' },
         { name = 'luasnip' },
         { name = 'buffer' },
         { name = 'path' },
