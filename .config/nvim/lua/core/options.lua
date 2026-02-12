@@ -1,3 +1,5 @@
+-- Enable 24-bit RGB color in the TUI
+vim.opt.termguicolors = true
 vim.o.title = true -- Show nvim title in the terminal window.
 vim.opt.nrformats:append 'alpha' -- Lets increment/decrement letters with ctrl+a/x.
 vim.o.hlsearch = true -- Set highlight on search
