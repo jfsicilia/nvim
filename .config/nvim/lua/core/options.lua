@@ -13,7 +13,7 @@ vim.o.ignorecase = true -- Case-insensitive searching UNLESS \C or capital in se
 vim.o.smartcase = true -- smart case
 vim.wo.signcolumn = 'yes' -- Keep signcolumn on by default
 vim.o.updatetime = 250 -- Decrease update time
-vim.o.ttimeoutlen = 500 -- time to wait for key code sequences to complete (in milliseconds)
+vim.o.ttimeoutlen = 10 -- time to wait for key code sequences to complete (in milliseconds)
 vim.o.timeoutlen = 500 -- time to wait for a mapped sequence (leader + ) to complete (in milliseconds)
 vim.o.backup = false -- creates a backup file
 vim.o.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
@@ -56,19 +56,5 @@ vim.opt.runtimepath:remove '/usr/share/vim/vimfiles' -- separate vim plugins fro
 vim.opt.foldenable = true -- Allow folding.
 vim.opt.foldlevel = 99 -- Max fold depth shown.
 vim.opt.foldlevelstart = 99 -- Fold level applied when opening a file.
-
--- Activates commonlisp language syntax when opening .kbd files.
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-  pattern = '*.kbd',
-  callback = function()
-    vim.bo.filetype = 'commonlisp'
-  end,
-})
-
-vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when copying (yank)',
-  group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-})
+-- Resources to save in session.
+vim.opt.sessionoptions = 'buffers,curdir,tabpages,winsize,help,globals,terminal'

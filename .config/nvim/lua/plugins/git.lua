@@ -1,5 +1,5 @@
--- Adds git related signs to the gutter, as well as utilities for managing changes
 return {
+  -- Adds git related signs to the gutter, as well as utilities for managing changes
   'lewis6991/gitsigns.nvim',
   opts = {
     -- See `:help gitsigns.txt`
@@ -89,7 +89,7 @@ return {
 
       -- Toggles
       map('n', '<leader>tb', gitsigns.toggle_current_line_blame, 'Toggle line blame')
-      map('n', '<leader>tw', gitsigns.toggle_word_diff, 'Toggle word diff')
+      map('n', '<leader>tl', gitsigns.toggle_word_diff, 'Toggle word diff')
 
       -- Text object
       map({ 'o', 'x' }, 'ih', gitsigns.select_hunk, 'Select hunk (text object)')

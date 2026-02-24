@@ -160,39 +160,64 @@ return {
           },
         },
       },
-      pylsp = {
-        settings = {
-          pylsp = {
-            plugins = {
-              pyflakes = { enabled = false },
-              pycodestyle = { enabled = false },
-              autopep8 = { enabled = false },
-              yapf = { enabled = false },
-              mccabe = { enabled = false },
-              pylsp_mypy = { enabled = false },
-              pylsp_black = { enabled = false },
-              pylsp_isort = { enabled = false },
-            },
-          },
-        },
-      },
-      -- basedpyright = {
-      --   -- Config options: https://github.com/DetachHead/basedpyright/blob/main/docs/settings.md
+      -- pylsp = {
       --   settings = {
-      --     basedpyright = {
-      --       disableOrganizeImports = true, -- Using Ruff's import organizer
-      --       disableLanguageServices = false,
-      --       analysis = {
-      --         ignore = { '*' },                 -- Ignore all files for analysis to exclusively use Ruff for linting
-      --         typeCheckingMode = 'off',
-      --         diagnosticMode = 'openFilesOnly', -- Only analyze open files
-      --         useLibraryCodeForTypes = true,
-      --         autoImportCompletions = true,     -- whether pyright offers auto-import completions
+      --     pylsp = {
+      --       plugins = {
+      --         pyflakes = { enabled = false },
+      --         pycodestyle = { enabled = false },
+      --         autopep8 = { enabled = false },
+      --         yapf = { enabled = false },
+      --         mccabe = { enabled = false },
+      --         pylsp_mypy = { enabled = false },
+      --         pylsp_black = { enabled = false },
+      --         pylsp_isort = { enabled = false },
       --       },
       --     },
       --   },
       -- },
-      ruff = {},
+      -- Basedpyright: The next-generation Python LSP for robust type checking and docstrings.
+      -- Config options: https://github.com/DetachHead/basedpyright/blob/main/docs/settings.md
+      basedpyright = {
+        settings = {
+          basedpyright = {
+            -- Using Ruff for import organization, so we disable it in Basedpyright.
+            disableOrganizeImports = true,
+            analysis = {
+              -- Essential for local code intelligence.
+              autoSearchPaths = true,
+              -- Analyzes installed libraries to provide types even if they don't have stubs.
+              useLibraryCodeForTypes = true,
+              -- Automatically offers to add imports while you type.
+              autoImportCompletions = true,
+              -- Set to 'standard' for robust type checking.
+              -- Use 'off' if you find it too intrusive, or 'all' for maximum strictness.
+              typeCheckingMode = 'standard',
+              -- Performance optimization: Only analyze open files.
+              diagnosticMode = 'openFilesOnly',
+              -- Additional robust checks.
+              diagnosticSeverityOverrides = {
+                -- Ensures you don't forget to 'await' async functions.
+                reportUnusedCoroutine = 'error',
+              },
+              -- Specific settings for Basedpyright hints
+              inlayHints = {
+                variableTypes = true,
+                functionReturnTypes = true,
+                callArgumentNames = true,
+                genericTypes = true,
+              },
+            },
+          },
+        },
+      },
+      -- Ruff: Ultrafast linter and formatter.
+      ruff = {
+        on_attach = function(client)
+          -- Disable hover in Ruff to avoid conflicts with Basedpyright's hover (docstrings).
+          client.server_capabilities.hoverProvider = false
+        end,
+      },
       jsonls = {},
       sqlls = {},
       terraformls = {},

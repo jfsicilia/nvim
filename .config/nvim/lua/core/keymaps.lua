@@ -31,7 +31,7 @@ nmap('<Esc>', ':noh<CR>', 'Clear highlights')
 
 -- Save file
 nmap('<C-s>', '<cmd>w<CR>', 'Save file')
-imap('<C-s>', '<C-o>:w<CR>i', 'Save file')
+imap('<C-s>', '<C-o>:w<CR>', 'Save file')
 
 -- Save file without auto-formatting
 nmap('<leader>wn', '<cmd>noautocmd w <CR>', 'Save file without formatting')
