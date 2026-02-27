@@ -19,6 +19,10 @@ local function imap(lhs, rhs, desc)
   vim.keymap.set('i', lhs, rhs, vim.tbl_extend('force', opts, { desc = 'JFS: ' .. desc }))
 end
 
+local function tmap(lhs, rhs, desc)
+  vim.keymap.set('t', lhs, rhs, vim.tbl_extend('force', opts, { desc = 'JFS: ' .. desc }))
+end
+
 -- Disable the leader key's default behavior in Normal and Visual modes
 vim.keymap.set({ 'n', 'v' }, ',', '<Nop>', { silent = true })
 
@@ -94,10 +98,18 @@ nmap('<leader>\\', '<C-w>v', 'Split window vertically')
 nmap('<leader>-', '<C-w>s', 'Split window horizonatally')
 
 -- Navigate between splits
-nmap('<leader>k', ':wincmd k<CR>', 'Focus above pane')
-nmap('<leader>j', ':wincmd j<CR>', 'Focus below pane')
-nmap('<leader>h', ':wincmd h<CR>', 'Focus left pane')
-nmap('<leader>l', ':wincmd l<CR>', 'Focus right pane')
+nmap('<leader>k', '<C-w>k', 'Focus above pane')
+nmap('<leader>j', '<C-w>j', 'Focus below pane')
+nmap('<leader>h', '<C-w>h', 'Focus left pane')
+nmap('<leader>l', '<C-w>l', 'Focus right pane')
+--
+-- Navigate between splits from the terminal.
+-- Salir al modo normal de Neovim con doble Esc desde el terminal
+tmap('<Esc><Esc>', [[<C-\><C-n>]], 'Total escape form terminal')
+tmap('<A-h>', [[<C-\><C-n><C-w>h]], 'Focus above pane')
+tmap('<A-j>', [[<C-\><C-n><C-w>j]], 'Focus below pane')
+tmap('<A-k>', [[<C-\><C-n><C-w>k]], 'Focus left pane')
+tmap('<A-l>', [[<C-\><C-n><C-w>l]], 'Focus right pane')
 
 -- Blank lines
 nmap('<leader>nl', ":<C-u>call append(line('.'), repeat([''], v:count1))<CR>", 'New line below (remain normal mode)')

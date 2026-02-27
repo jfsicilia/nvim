@@ -42,3 +42,20 @@ vim.api.nvim_create_autocmd('VimLeave', {
     save_session()
   end,
 })
+
+-- Start in insert mode when opening terminal.
+vim.api.nvim_create_autocmd('TermOpen', {
+  desc = 'Starts terminal in insert mode',
+  group = core_autocmd,
+  pattern = 'term://*',
+  command = 'startinsert',
+})
+
+-- Close pane when exiting terminal.
+vim.api.nvim_create_autocmd('TermClose', {
+  desc = 'Closes pane when exiting terminal',
+  group = core_autocmd,
+  callback = function()
+    vim.cmd 'bdelete'
+  end,
+})

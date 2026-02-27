@@ -34,6 +34,7 @@ require('lazy').setup {
   require 'plugins.fastjump', -- Fast jump with labels plugin (flash).
   require 'plugins.fuzzyfind', -- Fuzzy find plugin (telescope).
   require 'plugins.git', -- Git enhancements.
+  require 'plugins.terminal', -- Terminal in nvim.
   require 'plugins.lazygit', -- Lazy git plugin.
   require 'plugins.bufferfileexplorer', -- Use buffer as file explorer plugin (oil).
   require 'plugins.lsp', -- Language Server Providers plugin (nvim-lspconfig + mason).
