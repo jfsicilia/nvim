@@ -59,3 +59,18 @@ vim.api.nvim_create_autocmd('TermClose', {
     vim.cmd 'bdelete'
   end,
 })
+
+vim.api.nvim_create_autocmd('WinEnter', {
+  desc = 'Changes the title based on the filetype',
+  group = core_autocmd,
+  callback = function()
+    local ft = vim.bo.filetype
+    if ft == 'neo-tree' then
+      vim.opt.titlestring = 'Explorer - Nvim'
+    else
+      local filename = vim.fn.expand '%:t'
+      local filepath = vim.fn.expand '%:~:h'
+      vim.opt.titlestring = filename .. ' (' .. filepath .. ') - Nvim'
+    end
+  end,
+})
