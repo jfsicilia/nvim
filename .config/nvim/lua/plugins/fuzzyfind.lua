@@ -45,6 +45,11 @@ return {
           -- ['q'] = actions.close,
           -- },
         },
+        path_display = {
+          filename_first = {
+            reverse_directories = true,
+          },
+        },
       },
       pickers = {
         find_files = {
@@ -68,16 +73,11 @@ return {
         oldfiles = {
           initial_mode = 'insert',
         },
-      },
-      live_grep = {
-        file_ignore_patterns = { 'node_modules', '.git', '.venv' },
-        additional_args = function(_)
-          return { '--hidden' }
-        end,
-      },
-      path_display = {
-        filename_first = {
-          reverse_directories = true,
+        live_grep = {
+          file_ignore_patterns = { 'node_modules', '.git', '.venv' },
+          additional_args = function(_)
+            return { '--hidden' }
+          end,
         },
       },
       extensions = {
