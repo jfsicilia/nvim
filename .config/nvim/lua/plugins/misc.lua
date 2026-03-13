@@ -17,6 +17,10 @@ return {
     'tpope/vim-rhubarb',
   },
   {
+    -- Diff for folders.
+    'will133/vim-dirdiff',
+  },
+  {
     -- Autoclose parentheses, brackets, quotes, etc.
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
