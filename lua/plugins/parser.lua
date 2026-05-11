@@ -2,28 +2,28 @@
 -- Info interesante:
 -- https://www.reddit.com/r/neovim/comments/1ky0i9q/treesittermodulesnvim_a_reimplementation_of/
 -- https://www.reddit.com/r/neovim/comments/1l3z4j4/help_with_new_treesitter_setup_in_neovim_default/
-local languages = { 'c', 'lua', 'python', 'rust', 'javascript', 'zig', 'terraform', 'commonlisp' }
+local languages = { "c", "lua", "python", "rust", "javascript", "zig", "terraform", "commonlisp" }
 return {
-  {
-    'nvim-treesitter/nvim-treesitter',
-    branch = 'main',
-    build = ':TSUpdate',
-  },
-  {
-    -- Este plugin, permite configurar treesitter facilmente: lenguajes, folding, highlighting,
-    -- indent e incremental_selection. También podrías utilizar la configuración que viene
-    -- comentada debajo si no quieres depender de este plugin, pero el tema del incremento
-    -- de la selección no lo tendrías configurado.
-    'MeanderingProgrammer/treesitter-modules.nvim',
-    dependencies = { 'nvim-treesitter/nvim-treesitter' },
-    opts = {
-      ensure_installed = languages,
-      fold = { enable = true },
-      highlight = { enable = true },
-      indent = { enable = true },
-      incremental_selection = { enable = true },
-    },
-  },
+	{
+		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
+		build = ":TSUpdate",
+	},
+	{
+		-- Este plugin, permite configurar treesitter facilmente: lenguajes, folding, highlighting,
+		-- indent e incremental_selection. También podrías utilizar la configuración que viene
+		-- comentada debajo si no quieres depender de este plugin, pero el tema del incremento
+		-- de la selección no lo tendrías configurado.
+		"MeanderingProgrammer/treesitter-modules.nvim",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		opts = {
+			ensure_installed = languages,
+			fold = { enable = true },
+			highlight = { enable = true },
+			indent = { enable = true },
+			incremental_selection = { enable = true },
+		},
+	},
 }
 
 -- return {
